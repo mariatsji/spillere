@@ -184,63 +184,117 @@ h2 {
 }
 
 .left-goal-marking {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 4;
+    display: none;
 }
 
 .pitch-player-layer {
     position: absolute;
     inset: 0;
-    padding: 1rem;
+    padding: 0.9rem;
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 0.9rem;
     pointer-events: auto;
 }
 
-.pitch-player-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    max-width: min(44rem, 100%);
-    pointer-events: auto;
+.keeper-dropzone {
+    width: min(20%, 9.5rem);
+    min-width: 6.25rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.4rem;
 }
 
-.pitch-drop-hint {
+.outfield-dropzone {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.4rem;
+}
+
+.pitch-zone-title {
     margin: 0;
-    padding: 0.45rem 0.75rem;
-    border-radius: 999px;
-    border: 1px dashed rgba(255, 255, 255, 0.7);
+    padding: 0.2rem 0.45rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.16);
     color: #ffffff;
-    background: rgba(0, 0, 0, 0.14);
-    font-size: 0.9rem;
-    pointer-events: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.keeper-slot {
+    min-height: 100%;
+    border: 1px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 0.35rem;
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+}
+
+.outfield-grid {
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    border: 1px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+
+.pitch-slot {
+    border: 1px dashed rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    min-height: 3.3rem;
+    padding: 0.2rem;
+    display: grid;
+    align-content: center;
+    justify-content: stretch;
 }
 
 .pitch-player-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.7rem;
-    border-radius: 999px;
+    display: grid;
+    gap: 0.18rem;
+    padding: 0.35rem 0.45rem;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.16);
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.58);
+    color: #111111;
     backdrop-filter: blur(1px);
     cursor: grab;
+    min-width: 0;
+}
+
+.keeper-slot .pitch-player-item {
+    min-height: 3.4rem;
 }
 
 .player-card-name {
     font-weight: 700;
+    line-height: 1.15;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player-time {
-    font-size: 0.85rem;
+    font-size: 0.76rem;
     opacity: 0.92;
+}
+
+.pitch-player-item .player-time {
+    display: block;
+    margin-top: 0.08rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
 
 .is-dragging {
@@ -250,6 +304,17 @@ h2 {
 .drop-active {
     outline: 2px dashed rgba(255, 255, 255, 0.9);
     outline-offset: -4px;
+}
+
+.drop-hint {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.74rem;
+    line-height: 1.2;
+}
+
+.drop-hint-center {
+    text-align: center;
 }
 
 .player-form {
@@ -439,6 +504,36 @@ h2 {
 
     .pitch-wrapper {
         border-radius: 0;
+    }
+
+    .pitch-player-layer {
+        gap: 0.55rem;
+        padding: 0.55rem;
+    }
+
+    .keeper-dropzone {
+        width: min(26%, 7rem);
+        min-width: 4.8rem;
+    }
+
+    .outfield-grid {
+        gap: 0.3rem;
+    }
+
+    .pitch-slot {
+        min-height: 2.85rem;
+    }
+
+    .pitch-player-item {
+        padding: 0.28rem 0.35rem;
+    }
+
+    .player-card-name {
+        font-size: 0.8rem;
+    }
+
+    .player-time {
+        font-size: 0.68rem;
     }
 
     .pitch-line {

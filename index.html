@@ -48,9 +48,15 @@
                     <path d="M 1000 393 A 168 75 0 0 0 1000 607" class="pitch-line"></path>
                     <circle cx="1000" cy="500" r="4" class="pitch-line pitch-fill"></circle>
                 </svg>
-                <div class="pitch-player-layer" id="pitch-dropzone" aria-label="Pitch dropzone">
-                    <ul class="pitch-player-list" id="pitch-player-list"></ul>
-                    <p class="pitch-drop-hint" id="pitch-drop-hint">Drag subs onto the pitch</p>
+                <div class="pitch-player-layer" aria-label="Pitch dropzones">
+                    <div class="keeper-dropzone" id="keeper-dropzone">
+                        <h3 class="pitch-zone-title">Keeper</h3>
+                        <div class="keeper-slot" id="keeper-slot"></div>
+                    </div>
+                    <div class="outfield-dropzone" id="outfield-dropzone">
+                        <h3 class="pitch-zone-title">Outfield</h3>
+                        <ul class="outfield-grid" id="outfield-grid"></ul>
+                    </div>
                 </div>
             </div>
         </div>
