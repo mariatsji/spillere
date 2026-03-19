@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spillerbytte</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Spillerbytte</h1>
+        <div class="layout-section pitch-section">
+            <div class="pitch-wrapper" aria-label="Football pitch illustration">
+                <svg viewBox="0 0 800 520" role="img" aria-labelledby="pitch-title">
+                    <title id="pitch-title">Football pitch</title>
+                    <rect x="20" y="20" width="760" height="480" rx="12" class="pitch-grass"></rect>
+                    <rect x="20" y="20" width="760" height="480" rx="12" class="pitch-line"></rect>
+                    <line x1="400" y1="20" x2="400" y2="500" class="pitch-line"></line>
+                    <circle cx="400" cy="260" r="70" class="pitch-line"></circle>
+                    <circle cx="400" cy="260" r="4" class="pitch-line pitch-fill"></circle>
+                    <rect x="20" y="150" width="110" height="220" class="pitch-line"></rect>
+                    <rect x="20" y="200" width="45" height="120" class="pitch-line"></rect>
+                    <circle cx="110" cy="260" r="4" class="pitch-line pitch-fill"></circle>
+                    <rect x="670" y="150" width="110" height="220" class="pitch-line"></rect>
+                    <rect x="735" y="200" width="45" height="120" class="pitch-line"></rect>
+                    <circle cx="690" cy="260" r="4" class="pitch-line pitch-fill"></circle>
+                    <path d="M 20 210 A 80 80 0 0 1 20 310" class="pitch-line"></path>
+                    <path d="M 780 210 A 80 80 0 0 0 780 310" class="pitch-line"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="layout-section player-entry-section">
+            <h2>Subs</h2>
+            <form class="player-form" id="player-form">
+                <label>
+                    <span>Player name</span>
+                    <input type="text" id="player-name" name="playerName" placeholder="Enter player name" required>
+                </label>
+                <button type="submit">Add player</button>
+            </form>
+            <div class="subs-list-section">
+                <h3>Current Subs</h3>
+                <ul class="subs-list" id="subs-list"></ul>
+                <p class="subs-empty-state" id="subs-empty-state">No players added yet.</p>
+            </div>
+        </div>
+    </main>
+    <script src="players.js"></script>
+</body>
+</html>
