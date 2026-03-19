@@ -8,39 +8,65 @@
 </head>
 <body>
     <main>
-        <h1>Spillerbytte</h1>
+        <div class="match-controls layout-section">
+            <div class="match-controls-header">
+                <p class="match-status" id="match-status">Match not started</p>
+            </div>
+            <div class="match-controls-actions">
+                <button type="button" class="match-button match-button-primary" id="start-resume-match" aria-label="Start match" title="Start match">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="match-button-icon">
+                        <path d="M8 6 L18 12 L8 18 Z"></path>
+                    </svg>
+                </button>
+                <button type="button" class="match-button match-button-secondary" id="pause-match" aria-label="Pause match" title="Pause match" disabled>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="match-button-icon">
+                        <path d="M7 6 H10 V18 H7 Z M14 6 H17 V18 H14 Z"></path>
+                    </svg>
+                </button>
+                <button type="button" class="match-button match-button-reset" id="reset-match" aria-label="Reset app state" title="Reset app state">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="match-button-icon">
+                        <path d="M9 3 H15 L16 5 H21 V7 H3 V5 H8 Z M6 9 H8 V19 H6 Z M11 9 H13 V19 H11 Z M16 9 H18 V19 H16 Z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
         <div class="layout-section pitch-section">
             <div class="pitch-wrapper" aria-label="Football pitch illustration">
-                <svg viewBox="0 0 800 520" role="img" aria-labelledby="pitch-title">
-                    <title id="pitch-title">Football pitch</title>
-                    <rect x="20" y="20" width="760" height="480" rx="12" class="pitch-grass"></rect>
-                    <rect x="20" y="20" width="760" height="480" rx="12" class="pitch-line"></rect>
-                    <line x1="400" y1="20" x2="400" y2="500" class="pitch-line"></line>
-                    <circle cx="400" cy="260" r="70" class="pitch-line"></circle>
-                    <circle cx="400" cy="260" r="4" class="pitch-line pitch-fill"></circle>
-                    <rect x="20" y="150" width="110" height="220" class="pitch-line"></rect>
-                    <rect x="20" y="200" width="45" height="120" class="pitch-line"></rect>
-                    <circle cx="110" cy="260" r="4" class="pitch-line pitch-fill"></circle>
-                    <rect x="670" y="150" width="110" height="220" class="pitch-line"></rect>
-                    <rect x="735" y="200" width="45" height="120" class="pitch-line"></rect>
-                    <circle cx="690" cy="260" r="4" class="pitch-line pitch-fill"></circle>
-                    <path d="M 20 210 A 80 80 0 0 1 20 310" class="pitch-line"></path>
-                    <path d="M 780 210 A 80 80 0 0 0 780 310" class="pitch-line"></path>
+                <svg viewBox="0 0 1000 1000" role="img" aria-labelledby="pitch-title">
+                    <title id="pitch-title">Half football pitch</title>
+                    <rect x="0" y="0" width="1000" height="1000" class="pitch-grass"></rect>
+                    <rect x="0" y="0" width="1000" height="1000" class="left-goal-marking"></rect>
+                    <rect x="0" y="205" width="306" height="591" class="left-goal-marking"></rect>
+                    <rect x="0" y="366" width="103" height="268" class="left-goal-marking"></rect>
+                    <path d="M 1000 250 A 250 250 0 0 0 1000 750" class="left-goal-marking"></path>
+                    <rect x="0" y="0" width="1000" height="1000" class="pitch-line"></rect>
+                    <line x1="1000" y1="0" x2="1000" y2="1000" class="pitch-line"></line>
+                    <rect x="0" y="205" width="306" height="591" class="pitch-line"></rect>
+                    <rect x="0" y="366" width="103" height="268" class="pitch-line"></rect>
+                    <circle cx="217" cy="500" r="4" class="pitch-line pitch-fill"></circle>
+                    <path d="M 306 393 A 168 75 0 0 1 306 607" class="pitch-line"></path>
+                    <path d="M 1000 393 A 168 75 0 0 0 1000 607" class="pitch-line"></path>
+                    <circle cx="1000" cy="500" r="4" class="pitch-line pitch-fill"></circle>
                 </svg>
+                <div class="pitch-player-layer" id="pitch-dropzone" aria-label="Pitch dropzone">
+                    <ul class="pitch-player-list" id="pitch-player-list"></ul>
+                    <p class="pitch-drop-hint" id="pitch-drop-hint">Drag subs onto the pitch</p>
+                </div>
             </div>
         </div>
 
         <div class="layout-section player-entry-section">
-            <h2>Subs</h2>
             <form class="player-form" id="player-form">
-                <label>
-                    <span>Player name</span>
+                <label class="player-form-field">
                     <input type="text" id="player-name" name="playerName" placeholder="Enter player name" required>
                 </label>
-                <button type="submit">Add player</button>
+                <button type="submit" class="player-form-submit" aria-label="Add player" title="Add player">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="player-form-submit-icon">
+                        <path d="M11 5 H13 V11 H19 V13 H13 V19 H11 V13 H5 V11 H11 Z"></path>
+                    </svg>
+                </button>
             </form>
-            <div class="subs-list-section">
-                <h3>Current Subs</h3>
+            <div class="subs-list-section" id="subs-dropzone">
                 <ul class="subs-list" id="subs-list"></ul>
                 <p class="subs-empty-state" id="subs-empty-state">No players added yet.</p>
             </div>
