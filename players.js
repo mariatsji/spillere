@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     id: typeof rawPlayer.id === "string" ? rawPlayer.id : createPlayerId(),
                     name: rawPlayer.name.trim(),
                     location: normalizeLocation(rawPlayer),
-                    playingSeconds: Number.isFinite(rawPlayer.playingSeconds) ? Math.max(0, Math.floor(rawPlayer.playingSeconds)) : 0,
+                    playingSeconds: Number.isFinite(rawPlayer.playingSeconds) ? Math.max(0, rawPlayer.playingSeconds) : 0,
                     lastStartedAt: Number.isFinite(rawPlayer.lastStartedAt) ? rawPlayer.lastStartedAt : null
                 };
             });
@@ -120,12 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
         return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     }
 
+    function getRateMultiplier(player) {
+        if (player.location === "keeper") {
+            return 0.5;
+        }
+
+        return 1;
+    }
+
     function getDisplayedSeconds(player) {
         if (!player.lastStartedAt) {
             return player.playingSeconds;
         }
 
-        return player.playingSeconds + Math.floor((Date.now() - player.lastStartedAt) / 1000);
+        return player.playingSeconds + ((Date.now() - player.lastStartedAt) / 1000) * getRateMultiplier(player);
     }
 
     function findPlayer(playerId) {
@@ -179,20 +187,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setPlayerLocation(player, nextLocation) {
-        var wasOnPitch = isOnPitch(player);
-
         if (player.location === nextLocation) {
             return;
         }
 
+        stopPlayerClock(player);
+
         player.location = nextLocation;
 
-        if (wasOnPitch && !isOnPitch(player)) {
-            stopPlayerClock(player);
-            return;
-        }
-
-        if (!wasOnPitch && isOnPitch(player)) {
+        if (matchState === "running" && isOnPitch(player)) {
             startPlayerClock(player);
         }
     }
@@ -210,6 +213,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (player.location === "subs") {
                 node.textContent = "Bench | " + formatSeconds(getDisplayedSeconds(player));
+                return;
+            }
+
+            if (player.location === "keeper") {
+                node.textContent = "0.5x | " + formatSeconds(getDisplayedSeconds(player));
                 return;
             }
 
@@ -395,7 +403,14 @@ document.addEventListener("DOMContentLoaded", function () {
         status.setAttribute("data-player-id", player.id);
 
         name.textContent = player.name;
-        status.textContent = onPitchCard ? formatSeconds(getDisplayedSeconds(player)) : "Bench | " + formatSeconds(getDisplayedSeconds(player));
+
+        if (onPitchCard && player.location === "keeper") {
+            status.textContent = "0.5x | " + formatSeconds(getDisplayedSeconds(player));
+        } else if (onPitchCard) {
+            status.textContent = formatSeconds(getDisplayedSeconds(player));
+        } else {
+            status.textContent = "Bench | " + formatSeconds(getDisplayedSeconds(player));
+        }
 
         listItem.addEventListener("dragstart", function (event) {
             handleDragStart(event, player.id);
